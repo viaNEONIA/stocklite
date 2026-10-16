@@ -1,19 +1,24 @@
-# StockLite PWA
+# StockLite 改修版 (2026-10-16)
 
-GitHub Pagesで動作する数量・タグ管理アプリです。元のstocklite.htmlのIndexedDB（`stocklite` / `state` / `data`）およびJSON形式を維持しています。
+既存のIndexedDB `stocklite` / `state` / `data` を継続使用。データベースの削除・初期化処理は追加していません。
 
-## 公開手順
-1. GitHubで公開リポジトリ `stocklite` を作成します（無料プランでのGitHub Pages利用を想定）。
-2. このフォルダの **中身** をリポジトリのルートへアップロードし、mainブランチにコミットします。
-3. Settings → Pages → Build and deployment → Deploy from a branch → `main` / `/(root)` → Save。
-4. `https://ユーザー名.github.io/stocklite/` にアクセスします（反映まで時間がかかることがあります）。
-5. Android Chromeでサイトを開き、メニューから「アプリをインストール」または「ホーム画面に追加」を選択します。
-6. カメラ使用許可を求められたら許可します。
+## 機能
+- 下部ナビの選択色同期
+- 履歴編集・削除・保存期間設定（既存ユーザーは無期限、明示設定時に削除確認）
+- 品目URLの追加・編集・リンク
+- PWA manifest / service worker / アプリアイコン、iOS Safari画面調整、画像・手入力の代替導線
 
-## 注意
-- `content://` でHTMLを直接開いてもPWAとして動作しません。HTTPSの公開URLを使ってください。
-- IndexedDBは公開元（オリジン）単位で分離されるため、以前のローカルHTMLで保存したデータは自動移行されません。**旧版の設定からJSONを出力し、PWA側でインポート**してください。
-- データは端末内のIndexedDBへ自動保存され、GitHubへは送信されません。定期的にJSONバックアップを出力してください。
-- カメラでの検出にはブラウザの`BarcodeDetector`対応が必要です。未対応の場合は手入力をご利用ください。
-- アプリ更新時は `service-worker.js` の `CACHE` 名を変更すると古いキャッシュを破棄できます。
-- GitHub Pagesは公開サイトです。アプリのコードは公開されますが、IndexedDBの在庫データは公開されません。
+## GitHub Pages
+1. 既存データを設定画面からJSON出力して保管する。
+2. テストブランチに `index.html` `manifest.webmanifest` `sw.js` `icon-192.png` `icon-512.png` を同じ階層へ配置する。
+3. HTTPS上でAndroid Chrome / iOS Safariでテストする。
+4. 検証後に公開ブランチへマージする。キャッシュが古い場合はサイトデータ削除ではなく更新を試す（サイトデータ削除は在庫を消失させる）。
+
+## iPhone
+Safariで公開URLを開き、共有 → ホーム画面に追加。カメラが使えない場合はコード手入力または画像から読み取りを使用する。
+
+## 保存
+端末内IndexedDBへ自動保存。JSONエクスポート/インポートで手動バックアップ。AndroidとiOSの在庫は自動同期しません。
+
+## テスト
+`TEST_REPORT.md` 参照。実機検証は未実施。
