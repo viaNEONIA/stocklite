@@ -26,11 +26,11 @@ function cameraErrorMessage(e){
  if(name==='DecoderUnavailable')return '読み取りライブラリを読み込めません。通信状態を確認してください。';
  return 'カメラを起動できませんでした。'+(e?.message||'');
 }
-let diag={engine:'未起動',callbacks:0,detected:0,lastError:'なし'};
-function showDiagnostics(){const v=$('video');const out=$('scanDiagnostics');if(out)out.textContent=`エンジン: ${diag.engine}\n映像: ${v.videoWidth}×${v.videoHeight} / readyState=${v.readyState}\nコールバック: ${diag.callbacks} / 検出: ${diag.detected}\n最終エラー: ${diag.lastError}`}
+let diag={engine:'未起動',callbacks:0,detected:0,lastError:'なし',stage:'待機',elapsed:0};let diagWatchdog=null;
+function showDiagnostics(){const v=$('video');const out=$('scanDiagnostics');if(out)out.textContent=`エンジン: ${diag.engine}\n映像: ${v.videoWidth}×${v.videoHeight} / readyState=${v.readyState}\nコールバック: ${diag.callbacks} / 検出: ${diag.detected}\n最終エラー: ${diag.lastError}\n処理段階: ${diag.stage} / 経過: ${diag.elapsed}秒`}
 async function startScan(){
  if(stream||scanning)return;
- setMode(mode);diag={engine:"起動中",callbacks:0,detected:0,lastError:"なし"};showDiagnostics();const session=++scanSession;seenCodes.clear();absentFrames=0;
+ setMode(mode);clearInterval(diagWatchdog);diagWatchdog=null;diag={engine:"起動中",callbacks:0,detected:0,lastError:"なし",stage:'初期化',elapsed:0};showDiagnostics();const session=++scanSession;seenCodes.clear();absentFrames=0;
  const video=$('video');video.setAttribute('playsinline','');video.setAttribute('webkit-playsinline','');video.muted=true;video.autoplay=true;
  try{
   if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)throw Object.assign(new Error('HTTPSが必要です'),{name:'InsecureContextError'});
@@ -45,19 +45,24 @@ async function startScan(){
    }catch(e){detector=null}
   }
   if(!await loadImageDecoder()||!window.ZXing?.BrowserMultiFormatReader)throw Object.assign(new Error('ZXing unavailable'),{name:'DecoderUnavailable'});
-  reader=new ZXing.BrowserMultiFormatReader();diag.engine='ZXing';showDiagnostics();$('status').textContent='カメラ読み取り中（ZXing）';
+  reader=new ZXing.BrowserMultiFormatReader();diag.engine='ZXing';diag.stage='読み取りAPI呼出前';showDiagnostics();$('status').textContent='カメラ読み取り中（ZXing）';
   // ZXing UMD 0.21.x supports continuous decoding of an existing video element.
   // Do not repeatedly call decodeOnceFromVideoElement: it can stall and leave stale callbacks.
-  reader.decodeFromVideoElementContinuously(video,(result,error)=>{
+  const decodeFn=reader.decodeFromVideoElementContinuously;
+  if(typeof decodeFn!=='function')throw Object.assign(new Error('decodeFromVideoElementContinuously が存在しません'),{name:'UnsupportedZXingAPI'});
+  diag.stage='読み取りAPI呼出済み';const startedAt=Date.now();showDiagnostics();
+  diagWatchdog=setInterval(()=>{if(session!==scanSession){clearInterval(diagWatchdog);diagWatchdog=null;return}diag.elapsed=Math.floor((Date.now()-startedAt)/1000);if(diag.callbacks===0&&diag.elapsed>=5)diag.stage='コールバック未到達（5秒以上）';showDiagnostics()},1000);
+  const decodeResult=decodeFn.call(reader,video,(result,error)=>{
    if(session!==scanSession||!scanning)return;
-   diag.callbacks++;if(error&&error.name!=='NotFoundException'&&error.name!=='ChecksumException'&&error.name!=='FormatException')diag.lastError=error.name||String(error);if(result?.getText){const code=String(result.getText()).trim();if(code){diag.detected++;registerVisible([code]);void handleCode(code)}}else if(error?.name==='NotFoundException')registerVisible([]);showDiagnostics()
+   diag.callbacks++;diag.stage='コールバック受信';if(error&&error.name!=='NotFoundException'&&error.name!=='ChecksumException'&&error.name!=='FormatException')diag.lastError=error.name||String(error);if(result?.getText){const code=String(result.getText()).trim();if(code){diag.detected++;registerVisible([code]);void handleCode(code)}}else if(error?.name==='NotFoundException')registerVisible([]);showDiagnostics()
   });
+  await Promise.resolve(decodeResult);
  }catch(e){if(session!==scanSession)return;diag.lastError=e?.name||String(e);showDiagnostics();const message=cameraErrorMessage(e);stopScan();$('status').textContent=message+' コード手入力または画像選択を利用してください。';}
 }
 function registerVisible(codes){const visible=new Set(codes);if(!visible.size){if(++absentFrames>=4){seenCodes.clear();absentFrames=0}}else{absentFrames=0;for(const code of [...seenCodes])if(!visible.has(code))seenCodes.delete(code)}}
 async function scanLoop(session){while(scanning&&session===scanSession){try{const found=await detector.detect($('video'));const codes=found.map(f=>String(f.rawValue||'').trim()).filter(Boolean);diag.callbacks++;diag.detected+=codes.length;showDiagnostics();registerVisible(codes);if(codes.length)await handleCode(codes[0])}catch(e){$('status').textContent='標準読み取りでエラーが発生しました。カメラを再起動してください。';break}await new Promise(r=>setTimeout(r,180))}}
 function stopScan(){
- scanSession++;scanning=false;pending=null;$('confirmBox').classList.add('hidden');
+ clearInterval(diagWatchdog);diagWatchdog=null;scanSession++;scanning=false;pending=null;$('confirmBox').classList.add('hidden');
  try{zxingControls?.stop?.()}catch(e){}zxingControls=null;
  try{reader?.stopContinuousDecode?.()}catch(e){}
  try{reader?.reset?.()}catch(e){}reader=null;detector=null;
