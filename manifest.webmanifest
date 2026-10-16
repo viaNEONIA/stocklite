@@ -1,15 +1,1 @@
-{
-  "name": "StockLite 数量・タグ管理",
-  "short_name": "StockLite",
-  "description": "バーコード・QRコードで数量を管理する在庫アプリ",
-  "id": "./",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#f4f6f8",
-  "theme_color": "#174fdb",
-  "icons": [
-    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
-  ]
-}
+{"name":"StockLite 在庫管理","short_name":"StockLite","description":"数量・タグ管理","start_url":"./","scope":"./","display":"standalone","background_color":"#f4f6f8","theme_color":"#174fdb","icons":[{"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},{"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
