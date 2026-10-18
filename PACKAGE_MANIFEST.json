@@ -1,0 +1,40 @@
+{
+  "package": "StockLite_v10.4.2-dev_GitHub_Main",
+  "packaged_date_jst": "2026-10-18",
+  "runtime_build": "v10.4.2-dev-surface-ready-1",
+  "source_commit": "1f396c1662a5e1179d08f9ca37ddea4d97074600",
+  "documentation_commit": "37bfa3984c1af70ae6429f192fde6f6a87778d6d",
+  "new_github_main_commit": "UNKNOWN: user upload pending",
+  "runtime_changes": false,
+  "raw_user_evidence_included": false,
+  "runtime_files": {
+    "index.html": {
+      "source_path": "ios-candidate/index.html",
+      "sha256": "6c7553e49689abb618c7b16368cfbc1590802214b8d74ca83ea5c69df8b89ebd"
+    },
+    "ios-fullframe.js": {
+      "source_path": "ios-candidate/ios-fullframe.js",
+      "sha256": "f7a1b1db884c866384f4ab4fb8a05a27355978f5899df5d815b9cf207d0fd338"
+    },
+    "sw.js": {
+      "source_path": "ios-candidate/sw.js",
+      "sha256": "81beb038be9da8a0f28fdacbcc4991a5f09905ceb0bbfe1856b266e10a2f6ef3"
+    },
+    "manifest.webmanifest": {
+      "source_path": "ios-candidate/manifest.webmanifest",
+      "sha256": "12c0a23406c56cdebca7e20173d900c8898de346cebf39c25eb4b47cc5e9470a"
+    },
+    "icon-192.png": {
+      "source_path": "ios-candidate/icon-192.png",
+      "sha256": "5611e63f4f1a739f971a15f67ba7249bec9dff2a6c0de19a4747cef5916e7261"
+    },
+    "icon-512.png": {
+      "source_path": "ios-candidate/icon-512.png",
+      "sha256": "e9d96e1ee12f2bbb499179af14e4ade34a031aa399675d0b18c79d18492dfef7"
+    },
+    "stocklite-v10-4-2.html": {
+      "source_path": "ios-candidate/stocklite-v10-4-2.html",
+      "sha256": "6c7553e49689abb618c7b16368cfbc1590802214b8d74ca83ea5c69df8b89ebd"
+    }
+  }
+}

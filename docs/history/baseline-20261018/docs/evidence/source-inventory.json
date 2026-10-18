@@ -1,0 +1,94 @@
+{
+  "recorded_date_jst": "2026-10-18",
+  "repository": "https://github.com/viaNEONIA/stocklite",
+  "main_at_audit": "d2ddf7a27edb36dc8289c35486480163fd74e9fb",
+  "local_development_at_audit": "1f396c1662a5e1179d08f9ca37ddea4d97074600",
+  "v9_source_reference": "55131b330f5b56ce1844ab5512e4d44481e96ca0",
+  "measurement_commit_mapping": "UNKNOWN: JSON has build label only, no commit SHA",
+  "measurements": [
+    {
+      "original_filename": "StockLite_v10_measurements 3.json",
+      "sha256": "0ee3be0c5eb81095d445c914dddf8b8b46c6993c6a7f03aaa20b6557ee29fb30",
+      "build": "v10.0-dev-audit-1",
+      "rows": 13,
+      "first_at_utc": "2026-10-17T10:30:23.682Z",
+      "last_at_utc": "2026-10-17T10:32:53.393Z",
+      "local_evidence_path": "docs/evidence/measurements/measurements-03.json",
+      "included_in_git": false
+    },
+    {
+      "original_filename": "StockLite_v10_measurements.json",
+      "sha256": "deea4a0455fe966b67515d72ebaa64f07ad5a1a81eddf82c6402889eb2211f29",
+      "build": "v10.1-dev-paired-1",
+      "rows": 29,
+      "first_at_utc": "2026-10-17T11:20:51.470Z",
+      "last_at_utc": "2026-10-17T11:26:28.198Z",
+      "local_evidence_path": "docs/evidence/measurements/measurements-original.json",
+      "included_in_git": false
+    },
+    {
+      "original_filename": "StockLite_v10_measurements 5.json",
+      "sha256": "6a4414c0892485f1578f24545aa05f375023e3461caa7a6fa7268e9c8adb3e96",
+      "build": "v10.1-dev-paired-1",
+      "rows": 32,
+      "first_at_utc": "2026-10-17T11:32:59.304Z",
+      "last_at_utc": "2026-10-17T11:36:11.151Z",
+      "local_evidence_path": "docs/evidence/measurements/measurements-05.json",
+      "included_in_git": false
+    },
+    {
+      "original_filename": "StockLite_v10_measurements 7.json",
+      "sha256": "b14a6cb6d53bbe460e1f496228105b14cb403063ee983c6529fda92990077780",
+      "build": "v10.2-dev-fullframe-1",
+      "rows": 23,
+      "first_at_utc": "2026-10-17T11:59:23.590Z",
+      "last_at_utc": "2026-10-17T12:01:17.198Z",
+      "local_evidence_path": "docs/evidence/measurements/measurements-07.json",
+      "included_in_git": false
+    },
+    {
+      "original_filename": "StockLite_v10_measurements 8.json",
+      "sha256": "8f337126740a988d5b65010fd3848ea5af780e20d3935a04ff5085faa9889299",
+      "build": "v10.2-dev-fullframe-1",
+      "rows": 19,
+      "first_at_utc": "2026-10-17T12:14:08.208Z",
+      "last_at_utc": "2026-10-17T12:16:48.257Z",
+      "local_evidence_path": "docs/evidence/measurements/measurements-08.json",
+      "included_in_git": false
+    }
+  ],
+  "main_source_blobs": {
+    "CAMERA_FIX_REPORT.md": "fcfa88828bdc66468044820cb13f5123c55ceefd",
+    "README.md": "0217bc01c7a1423ddc836195764b595d322a04c5",
+    "README_V9.md": "b5fe4f17a2ee82d5a6ee51b7901c2e5b11d8d53a",
+    "README_V9_1.md": "e2beb9514eebecba109314c23a4e054c38abb9b8",
+    "README_V9_2.md": "8dc8bbfeb450ac5a9eea40a318a9ef02a48e1139",
+    "README_V9_3.md": "5c5e8c54b3563f7e2d11940b43e59a56d905c554",
+    "README_V9_4.md": "f874057e4128f6cc58e36292823cd9d4d0209ee8",
+    "README_V9_4_1.md": "73822faef57288e20fcb6b4afb992e14bd09ed97",
+    "TEST_REPORT.md": "ef6a7306f89e0a28729c21ee31d44ad7b084def6",
+    "V6_TEST_NOTES.md": "d6d8245fc9ba3776a6866e74ce5b06b539baed93",
+    "V7_TEST_NOTES.md": "10ae2b61085bce38f9473d867dad53025ce4beb8",
+    "V8_TEST_NOTES.md": "d197f62c91a63118fd9599f74edab151c12d0d97",
+    "V9_TEST_REPORT.md": "ab4749c15301842c002e6e57591a15ecfd8293d8",
+    "continuous.js": "c747b1596ed9a08866b4ad31e8569795de8f7149",
+    "diagnostic.js": "25c1e75da2c8651c90f14c7c2f4c52ffeff285db",
+    "icon-192.png": "989393b81e82641c99fe1001eb624f991fb9a75a",
+    "icon-512.png": "0858ee7968dfdeb2db9536188bdb11850f6224ac",
+    "index.html": "a8e6f52ec464c08acfa22d2279fc35acf4b7788d",
+    "manifest.webmanifest": "8c5688014248bfd4bd9a0f69e9cf126669f48457",
+    "paired.js": "e04c9c424b6c9a874e1931ca5abba9997b41e28c",
+    "service-worker.js": "9a29475c2817f901b27a343ff12e3dfac0ae095a",
+    "sw.js": "60d99b923882917210fca81304e6fc8e42f215e7",
+    "verify.cjs": "26214ba21ad8de424ab1595d17788e65c29be729"
+  },
+  "local_development_source_blobs": {
+    "ios-candidate/index.html": "6d525fbc3bcf7ffffe51269e0dff215938459fbe",
+    "ios-candidate/ios-fullframe.js": "365fccbf8392da7f4bb9acf4073c3c1e04134953",
+    "ios-candidate/sw.js": "0fec193ba24cf6de407bc7b00b37f7f7ab54abf9",
+    "ios-candidate/verify.cjs": "b0969ada25987e40d45d43ade2ccfea59a1ba008",
+    "diagnostics-v10/index.html": "e49b1a95759279d0e0e4dbdeefb95749b7367fda",
+    "diagnostics-v10/continuous.js": "320dec2fcb76ee26a64701be54d53b7bd7b26c99"
+  },
+  "raw_evidence_policy": "Raw measurement JSON and handover excluded from GitHub branch; retained in local evidence copy and preexisting user files."
+}
