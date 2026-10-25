@@ -9,7 +9,8 @@
 | 未登録コード→登録画面、手入力、写真入力 | IMPLEMENTED |
 | 履歴編集/削除/保存期間、JSON入出力 | IMPLEMENTED。JSON入出力のB1〜B5はiPhone/AndroidでVERIFIED（ユーザー報告）。同一データ往復の範囲で、旧形式・不正JSON・新端末移行は未確認。履歴編集は現在庫を変えない |
 | iOS全体映像ZXing、別フレームで連続2回/1秒以内 | IMPLEMENTED。診断FのJAN13実測はあるが本体のJAN8/13/QR読取→数量確認はVERIFIED（ユーザー報告）。2回一致/1秒内部条件の実機計測は未実施 |
-| iOS従来html5方式への切替、再起動 | IMPLEMENTED、模擬検証のみ |
+| iOS従来html5方式への切替、再起動 | VERIFIED（ユーザー報告、C3〜C5）：従来方式/全体映像ZXingの起動・JAN8/13/QR・3回再入。Safari/PWA別内訳と速度は未確認 |
+| カメラ権限拒否・許可復帰 | VERIFIED（ユーザー報告、C1〜C2）：iPhone Safari/Android Chromeで拒否時の表示・強制終了なし、許可後再読込で起動/読取 |
 | Android BarcodeDetector全3形式対応時採用、他はZXing | IMPLEMENTED。v9分岐を保持。Android ChromeのA1〜A7はVERIFIED（ユーザー報告）。内部デコーダ両経路の個別確認は未実施 |
 | PWA、保存後の再起動 | IMPLEMENTED。iPhone PWAの起動・読取・数量確定・再起動後保持はVERIFIED（ユーザー報告）。更新は未確認 |
 | pause前に映像/canvasを最大8秒待つ起動修正 | IMPLEMENTED。iPhone Safari/PWAの起動・5回再入で再発なし、VERIFIED（ユーザー報告） |
@@ -21,4 +22,4 @@ DB名stocklite、DB version1、store state、key data。値はitems/logs/setting
 
 JANは形式・桁数・チェックデジットを検査。QRはZXingの形式情報で受付。読取は順次で約200ms間隔。数量確認中は追加解析を休止。同じコードの重複通知を抑止する。iOS映像はhtml5-qrcodeで取得し解析をpause、全体PNGをZXingへ渡す。
 
-残課題はiOS読取速度・負荷、Androidデコーダ両経路の個別確認、PWA更新、権限拒否/復帰などの未確認項目。起動不具合は報告されたiPhone受入範囲では再発なし。最低対応OS、機種、現行配信元、v9報告ZIPとGitの一致はUNKNOWN。未確認をVERIFIEDにしない。
+残課題はiOS読取速度・負荷、Androidデコーダ両経路の個別確認、PWA更新/旧キャッシュなどの未確認項目。起動不具合は報告されたiPhone受入範囲では再発なし。最低対応OS、機種、現行配信元、v9報告ZIPとGitの一致はUNKNOWN。未確認をVERIFIEDにしない。
