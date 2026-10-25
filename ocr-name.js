@@ -49,7 +49,7 @@
     const token = generation;
     status('画像を準備しています…');
     try {
-      const bitmap = await createImageBitmap(file, {imageOrientation:'from-image', resizeWidth:1600, resizeQuality:'high'});
+      const bitmap = await createImageBitmap(file, {imageOrientation:'from-image'});
       if (token !== generation) { bitmap.close(); return; }
       image = bitmap; $('ocrTop').value = 0; $('ocrBottom').value = 100;
       draw(); status('上端・下端を動かして商品名の範囲を明るく残し、「文字を読み取る」を押してください。');
@@ -63,7 +63,11 @@
     status('日本語の認識データを準備しています（初回は通信が必要です）…');
     const crop = document.createElement('canvas');
     const top = Number($('ocrTop').value)/100, bottom = Number($('ocrBottom').value)/100;
-    crop.width = $('ocrCanvas').width; crop.height = Math.max(1, Math.round($('ocrCanvas').height*(bottom-top)));
+    // Crop original pixels first; preview downscaling must not reduce OCR detail.
+    const sourceHeight = Math.max(1, image.height*(bottom-top));
+    const scale = Math.min(2, 2400 / Math.max(image.width, sourceHeight));
+    crop.width = Math.max(1, Math.round(image.width*scale));
+    crop.height = Math.max(1, Math.round(sourceHeight*scale));
     crop.getContext('2d').drawImage(image, 0, image.height*top, image.width, image.height*(bottom-top), 0, 0, crop.width, crop.height);
     let activeWorker;
     timer = setTimeout(() => { if (token === generation) { reset(); $('ocrPanel').classList.remove('hidden'); status('時間がかかりすぎたため中止しました。通信状態と画像を確認して再度選んでください。'); } }, 120000);
@@ -77,6 +81,8 @@
       });
       if (token !== generation) return;
       worker = activeWorker;
+      await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '1' });
+      if (token !== generation) return;
       const { data } = await worker.recognize(crop);
       if (token !== generation) return;
       const lines = [...new Set(data.text.split(/\r?\n/).map(s => s.trim()).filter(Boolean))].slice(0,40);
