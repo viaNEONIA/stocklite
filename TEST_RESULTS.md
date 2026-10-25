@@ -74,3 +74,8 @@
 梱包時点ではv9がユーザー成功報告のある最後の基準だった。ただし報告ZIPとGit参照のバイト一致はUNKNOWN。v10.4.1ではpause UI未生成エラーの画像報告があり、v10.4.2は修正候補。その後、上記iPhone Safari/PWA受入で再発なしの報告を受領した。
 
 [過去の詳細記録](docs/history/baseline-20261018/TEST_RESULTS.md)を保存。測定原本/カメラ画像/在庫バックアップはGit用一式に含めない。
+
+
+## v10.5.0-dev Android OCR 実装検証（2026-10-25）
+
+確認者Codex。親コミット ff406773e0699e4db447f31fc45cc45ff0a3be29。Node VM制御試験4件：候補選択/行重複排除、取消後遅延結果破棄と再選択、並列開始抑止/範囲逆転、非Android無効。合格。インラインJS/ocr-name.js/SW構文検査合格。OCR/DBを実装した模擬環境ではなく、デコーダをスタブ化した制御検証。実モデルの認識精度、CDNロード、Android Chrome/PWA・iPhone実機、O1〜O7は未実施。v10.4.2の過去合格をこの版へ移さない。
