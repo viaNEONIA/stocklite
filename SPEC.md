@@ -1,4 +1,4 @@
-# StockLite v10.4.2-dev 仕様
+# StockLite v10.5.0-dev 仕様
 
 この配布物はv10.4.2統合候補本体をmain初回配置用にまとめたもの。正本はviaNEONIA/stocklite。初回配置コミットは3cab471af4d7c2fb8c3bb261288d37a5f5bbfee1。v10.4.2-devはiPhone Safari/PWAの項目1〜6、およびAndroid ChromeのA1〜A7がユーザー報告で合格。確認範囲と環境情報の不足は[試験記録](TEST_RESULTS.md)参照。全実機受入は未完了。詳しい既存仕様・状態一覧は[移行時仕様](docs/history/baseline-20261018/SPEC.md)を参照。そちらのmain=v10.2という記載は当時の観測である。
 
@@ -23,3 +23,10 @@ DB名stocklite、DB version1、store state、key data。値はitems/logs/setting
 JANは形式・桁数・チェックデジットを検査。QRはZXingの形式情報で受付。読取は順次で約200ms間隔。数量確認中は追加解析を休止。同じコードの重複通知を抑止する。iOS映像はhtml5-qrcodeで取得し解析をpause、全体PNGをZXingへ渡す。
 
 残課題はiOS読取速度・負荷、Androidデコーダ両経路の個別確認、PWA更新/旧キャッシュなどの未確認項目。起動不具合は報告されたiPhone受入範囲では再発なし。最低対応OS、機種、現行配信元、v9報告ZIPとGitの一致はUNKNOWN。未確認をVERIFIEDにしない。
+
+
+## v10.5.0-dev Android写真OCR（2026-10-25）
+
+IMPLEMENTED・実機未検証。品目登録/編集にAndroid限定の撮影・写真選択を追加。上下の範囲を選択し、日本語/英語OCRの行候補をタップして品名へ反映、手修正後に従来の保存操作で確定。既存品名の置換には確認あり。OCRだけでは在庫/履歴を保存しない。コードなし品目も登録可能。
+
+画像は端末のメモリで処理し、保存/外部送信しない。認識用プログラム・日本語/英語モデルは初回オンライン取得（CDNへのアクセス自体は発生）。20MB以下の画像、最大辺1600pxの解析。読取の上限120秒、取消/画面移動で結果破棄・worker解放。候補最大40行。横方向の切抜き・回転・商品名の自動判定は未実装。非Androidの既存入力は維持。DB形式変更なし。

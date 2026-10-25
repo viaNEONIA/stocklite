@@ -17,3 +17,8 @@ iOS: html5-qrcode 2.3.8で取得→video/canvas準備確認→pause(false)→自
 外部依存はjsDelivrのhtml5-qrcode 2.3.8と@zxing/library 0.21.3。初回オフラインのカメラ解析は保証しない。ブラウザのMediaDevices/video/canvas/Blob/IndexedDB/ServiceWorkerを利用する。package.jsonやコンパイル環境は不要。SWはstocklite-ios-candidate-接頭辞のキャッシュを扱い、同じスコープでPWA資産を取得する。
 
 コードは元のios-candidateのバイトコピー。過去の診断main用indexやdiagnostic.js/paired.js/continuous.jsは本配布物へ混ぜない。原本JSONや写真も含めない。過去のリポジトリ状態はdocs/historyでのみ説明する。
+
+
+## Android OCR追加（v10.5.0-dev）
+
+index.html → ocr-name.js → 必要時Tesseract.js 5.1.1 worker（jpn/eng）→ canvas切抜き → 行候補 → 品名の下書き。Tesseract.js / core 5.1.1はjsDelivr、モデルはtessdata.projectnaptha.com/4.0.0。写真を送るAPIは使用しない。ローカルocr-name.jsをSW shellに追加、cache名を更新。index.htmlの更新版はv10.5.0-dev。stocklite-v10-4-2.htmlは旧版入口として保持し同一内容ではなくなる。旧版と現行は同じDBを共有する。
