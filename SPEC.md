@@ -7,7 +7,7 @@
 | 品目登録/編集/削除、名称/タグ/コード検索、URL | IMPLEMENTED |
 | 購入/使用→数量確認→確定→在庫/履歴保存 | IMPLEMENTED。v9ユーザー報告と元配置での模擬合格あり、iPhone Safari/PWAの数量確定・保存・再起動はVERIFIED（ユーザー報告）。Android Chromeではキャンセル・購入+2・使用-1・履歴各1件・再起動後保持もVERIFIED（ユーザー報告）。iPhoneでの購入/使用双方の個別確認は未記録 |
 | 未登録コード→登録画面、手入力、写真入力 | IMPLEMENTED |
-| 履歴編集/削除/保存期間、JSON入出力 | IMPLEMENTED。履歴編集は現在庫を変えない |
+| 履歴編集/削除/保存期間、JSON入出力 | IMPLEMENTED。JSON入出力のB1〜B5はiPhone/AndroidでVERIFIED（ユーザー報告）。同一データ往復の範囲で、旧形式・不正JSON・新端末移行は未確認。履歴編集は現在庫を変えない |
 | iOS全体映像ZXing、別フレームで連続2回/1秒以内 | IMPLEMENTED。診断FのJAN13実測はあるが本体のJAN8/13/QR読取→数量確認はVERIFIED（ユーザー報告）。2回一致/1秒内部条件の実機計測は未実施 |
 | iOS従来html5方式への切替、再起動 | IMPLEMENTED、模擬検証のみ |
 | Android BarcodeDetector全3形式対応時採用、他はZXing | IMPLEMENTED。v9分岐を保持。Android ChromeのA1〜A7はVERIFIED（ユーザー報告）。内部デコーダ両経路の個別確認は未実施 |
