@@ -22,3 +22,8 @@ iOS: html5-qrcode 2.3.8で取得→video/canvas準備確認→pause(false)→自
 ## Android OCR追加（v10.5.0-dev）
 
 index.html → ocr-name.js → 必要時Tesseract.js 5.1.1 worker（jpn/eng）→ canvas切抜き → 行候補 → 品名の下書き。Tesseract.js / core 5.1.1はjsDelivr、モデルはtessdata.projectnaptha.com/4.0.0。写真を送るAPIは使用しない。ローカルocr-name.jsをSW shellに追加、cache名を更新。index.htmlの更新版はv10.5.0-dev。stocklite-v10-4-2.htmlは旧版入口として保持し同一内容ではなくなる。旧版と現行は同じDBを共有する。
+
+
+## v10.5.1-dev OCR精度改善候補（2026-10-25）
+
+ユーザーから写真OCRの認識精度不良の報告。対象写真・正解文字・誤認識結果は未取得で、原因を画像縮小だけに断定しない。元画像の先行1600px縮小を廃止し、選択範囲を元画素から切り出して最大辺2400px（小さい画像は最大2倍）へ変換。プレビュー1600pxと解析画像を分離。Tesseractの文字配置を疎な文字向けPSM 11に設定。写真外部送信なしを維持。元画像展開のメモリ負荷が増える可能性あり。実写真の改善率/速度/メモリは未検証。

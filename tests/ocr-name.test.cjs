@@ -6,7 +6,7 @@ function setup(agent='Android') {
  const nodes={}; const element=()=>({style:{},value:'',disabled:false,width:1,height:1,children:[],classList:{add(){},remove(){}},replaceChildren(){this.children=[]},append(x){this.children.push(x)},focus(){},getContext(){return {drawImage(){},fillRect(){}}}});
  const get=id=>nodes[id]??=element();
  let resolveRead, terminated=0;
- const worker={recognize:()=>new Promise(r=>resolveRead=r),terminate:async()=>{terminated++}};
+ const worker={setParameters:async()=>{},recognize:()=>new Promise(r=>resolveRead=r),terminate:async()=>{terminated++}};
  const context={document:{getElementById:get,createElement:element},navigator:{userAgent:agent},window:{Tesseract:{createWorker:async()=>worker}},createImageBitmap:async()=>({width:800,height:600,close(){}}),confirm:()=>true,setTimeout:()=>1,clearTimeout(){}};
  vm.runInNewContext(fs.readFileSync('ocr-name.js','utf8'),context);
  return {get,context,finish:text=>resolveRead({data:{text}}),terminated:()=>terminated};
