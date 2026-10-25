@@ -29,3 +29,12 @@ test('range input cannot enable a concurrent job; invalid range disabled',async(
  s.finish('');await job;s.get('ocrTop').value=90;s.get('ocrBottom').value=10;s.get('ocrTop').oninput();assert.equal(s.get('ocrRun').disabled,true);
 });
 test('non-Android does not bind OCR controls',()=>{assert.equal(setup('iPhone').get('ocrFile').onchange,undefined)});
+
+test('OCR whitespace removed before display, selection and deduplication; lines stay separate',async()=>{
+ const s=setup();await select(s);const job=s.get('ocrRun').onclick();await tick();
+ s.finish(" 商 品　名\t ​﻿\n商品名\nGreen Tea\n 　\t");await job;
+ assert.equal(s.get('ocrCandidates').children.length,2);
+ assert.equal(s.get('ocrCandidates').children[0].textContent,'商品名');
+ assert.equal(s.get('ocrCandidates').children[1].textContent,'GreenTea');
+ s.get('ocrCandidates').children[1].onclick();assert.equal(s.get('name').value,'GreenTea');
+});

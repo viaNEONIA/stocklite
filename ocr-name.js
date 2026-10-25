@@ -81,11 +81,11 @@
       });
       if (token !== generation) return;
       worker = activeWorker;
-      await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '1' });
+      await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '0' });
       if (token !== generation) return;
       const { data } = await worker.recognize(crop);
       if (token !== generation) return;
-      const lines = [...new Set(data.text.split(/\r?\n/).map(s => s.trim()).filter(Boolean))].slice(0,40);
+      const lines = [...new Set(data.text.split(/\r?\n/).map(s => s.replace(/[\s\u200B\uFEFF]+/gu, '')).filter(Boolean))].slice(0,40);
       for (const line of lines) {
         const button = document.createElement('button'); button.type = 'button'; button.textContent = line;
         button.style.cssText = 'display:block;width:100%;margin:6px 0;text-align:left;overflow-wrap:anywhere';
